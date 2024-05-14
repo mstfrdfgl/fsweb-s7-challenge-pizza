@@ -1,0 +1,22 @@
+.anasayfa-container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  color: white;
+}
+.anasayfa-header {
+  background-image: url("../Assets/mile1-assets/home-banner.png");
+  background-position: center;
+  background-size: cover;
+  flex-basis: 50rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+.padd {
+  padding-top: 0.5rem;
+}
+.bigfont {
+  font-size: 3rem;
+}

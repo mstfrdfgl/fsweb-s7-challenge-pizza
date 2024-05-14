@@ -19,7 +19,7 @@ export default function SiparisFormSayfasi() {
     Kabak: false,
   });
   const [not, setNot] = useState("");
-  const [fiyat, setFiyat] = useState(85.5);
+  const [fiyat, setFiyat] = useState(85);
   const [adet, setAdet] = useState(1);
   const adetArttir = (event) => {
     event.preventDefault();
@@ -33,7 +33,7 @@ export default function SiparisFormSayfasi() {
   };
   const malzemeFiyati = Object.values(malzemeler).filter(Boolean).length * 5;
   useEffect(() => {
-    let yeniFiyat = 85.5;
+    let yeniFiyat = 85;
     if (boyut === "küçük") {
       yeniFiyat -= 15;
     } else if (boyut === "büyük") {
@@ -74,11 +74,11 @@ export default function SiparisFormSayfasi() {
           <div className="info">
             <h2>Position Absolute Acı Pizza</h2>
             <div className="bilgi">
-              <span>{fiyat} ₺</span>
+              <span className="bold">{fiyat} ₺</span>
               <span>(yıldız)</span>
               <span>yorum sayısı</span>
             </div>
-            <p>
+            <p className="small">
               Lorem ipsum dolor sit, amet consectetur adipisicing elit. Pariatur
               fuga quis impedit laborum accusamus nemo culpa minus suscipit
               aliquid eius dolor similique, perspiciatis numquam excepturi
@@ -88,7 +88,7 @@ export default function SiparisFormSayfasi() {
           <form>
             <div className="form-boyut-kalınlık">
               <div className="boyut-form">
-                <label className="boyut-label">
+                <label className="boyut-label bold">
                   Boyut Seç <span className="zorunlu">*</span>
                 </label>
                 <div className="form-group">
@@ -129,7 +129,7 @@ export default function SiparisFormSayfasi() {
                 </div>
               </div>
               <div className="kalınlık-form">
-                <label>
+                <label className="bold">
                   Hamur Seç <span className="zorunlu">*</span>
                 </label>
                 <div className="form-group">
@@ -144,7 +144,7 @@ export default function SiparisFormSayfasi() {
             </div>
             <div className="form-malzemeler">
               <div className="malzemeler-form">
-                <label>Ek Malzemeler</label>
+                <label className="bold">Ek Malzemeler</label>
                 <label className="small">
                   En fazla 10 malzeme seçebilirsiniz. 5₺
                 </label>
@@ -167,7 +167,7 @@ export default function SiparisFormSayfasi() {
             </div>
             <div className="form-not">
               <div className="not-form">
-                <label htmlFor="not" className="not-label">
+                <label htmlFor="not" className="not-label bold">
                   Sipariş Notu
                 </label>
                 <textarea
@@ -191,8 +191,10 @@ export default function SiparisFormSayfasi() {
                 </button>
               </div>
               <div className="fiyat-bilgi">
-                <p className="malzeme-fiyat">Ek Malzemeler: {malzemeFiyati}</p>
-                <p className="toplam-fiyat">Toplam Fiyat: {fiyat}</p>
+                <p className="malzeme-fiyat">
+                  Ek Malzemeler: {malzemeFiyati} ₺
+                </p>
+                <p className="toplam-fiyat">Toplam Fiyat: {fiyat} ₺</p>
               </div>
             </div>
           </form>

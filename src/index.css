@@ -12,6 +12,12 @@ html {
   min-width: 100%;
   padding: 0;
 }
+h1 {
+  font-family: "Roboto Condensed";
+}
+.bold {
+  font-weight: bold;
+}
 button {
   margin: 0.5rem;
   padding: 0.5rem 1rem;
@@ -38,7 +44,7 @@ header {
 
 .header-container {
   width: 40%;
-  background-color: #ce28c6;
+  /* background-color: #ce28c6; */
   padding: 1rem;
   box-sizing: border-box;
 }
@@ -48,12 +54,12 @@ section {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #1db368;
+  /* background-color: #1db368; */
 }
 
 .section-container {
   width: 40%;
-  background-color: rgb(185, 187, 44);
+  /* background-color: rgb(185, 187, 44); */
   padding: 1rem;
   box-sizing: border-box;
   display: flex;
@@ -112,6 +118,7 @@ form {
   font-size: 0.8rem;
   display: block;
   padding-top: 0.5rem;
+  color: rgb(165, 165, 165);
 }
 .form-not {
   margin-top: 0.5rem;
