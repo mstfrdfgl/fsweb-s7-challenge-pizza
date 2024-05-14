@@ -14,6 +14,7 @@ html {
 }
 h1 {
   font-family: "Roboto Condensed";
+  color: white;
 }
 .bold {
   font-weight: bold;

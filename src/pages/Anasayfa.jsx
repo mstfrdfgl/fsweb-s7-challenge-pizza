@@ -30,7 +30,7 @@ export default function Anasayfa() {
           <Span>fırsatı kaçırma</Span>
           <span className="padd bigfont">KOD ACIKTIRIR</span>
           <span className="padd bigfont">PİZZA, DOYURUR</span>
-          <Link to="/siparis">
+          <Link to="/siparis-form">
             <Button>Acıktım</Button>
           </Link>
         </div>

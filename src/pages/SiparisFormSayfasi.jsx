@@ -1,10 +1,11 @@
+import axios from "axios";
 import react, { useEffect, useState } from "react";
 
 export default function SiparisFormSayfasi() {
   const [boyut, setBoyut] = useState("orta");
-  const [kalınlık, setKalınlık] = useState("");
+  const [kalınlık, setKalınlık] = useState("normal");
   const [malzemeler, setMalzemeler] = useState({
-    Pepperoni: false,
+    Pepperoni: true,
     Sosis: false,
     "Kanada Jambonu": false,
     "Tavuk Izgara": false,
@@ -12,15 +13,17 @@ export default function SiparisFormSayfasi() {
     Domates: false,
     Mısır: false,
     Sucuk: false,
-    Jalapeno: false,
-    Sarımsak: false,
-    Biber: false,
+    Jalapeno: true,
+    Sarımsak: true,
+    Biber: true,
     Ananas: false,
     Kabak: false,
   });
   const [not, setNot] = useState("");
   const [fiyat, setFiyat] = useState(85);
   const [adet, setAdet] = useState(1);
+  const [siparisId, setSiparisId] = useState(null);
+  const [siparisTarih, setSiparisTarih] = useState("");
   const adetArttir = (event) => {
     event.preventDefault();
     setAdet(adet + 1);
@@ -54,12 +57,35 @@ export default function SiparisFormSayfasi() {
     const seciliMalzemeler = { ...malzemeler, [name]: checked };
     const malzemeSayisi =
       Object.values(seciliMalzemeler).filter(Boolean).length;
-    if (malzemeSayisi <= 10) {
+    if (malzemeSayisi >= 4 && malzemeSayisi <= 10) {
       setMalzemeler(seciliMalzemeler);
     }
   }
   function handleNotChange(event) {
     setNot(event.target.value);
+  }
+  function handleSubmit(event) {
+    event.preventDefault();
+
+    const siparis = {
+      boyut,
+      kalınlık,
+      malzemeler,
+      not,
+      fiyat,
+      adet,
+    };
+
+    axios
+      .post("https://reqres.in/api/pizza", siparis)
+      .then((res) => {
+        setSiparisId(res.data.id);
+        setSiparisTarih(res.data.createdAt);
+        console.log("Yanıt:", res.data);
+      })
+      .catch((err) => {
+        console.error("Hata:", err);
+      });
   }
   return (
     <>
@@ -85,7 +111,7 @@ export default function SiparisFormSayfasi() {
               distinctio odio veritatis doloremque quos?
             </p>
           </div>
-          <form>
+          <form onSubmit={handleSubmit}>
             <div className="form-boyut-kalınlık">
               <div className="boyut-form">
                 <label className="boyut-label bold">
@@ -134,7 +160,6 @@ export default function SiparisFormSayfasi() {
                 </label>
                 <div className="form-group">
                   <select value={kalınlık} onChange={handleKalınlıkChange}>
-                    <option value="">Seçiniz</option>
                     <option value="ince">İnce</option>
                     <option value="normal">Normal</option>
                     <option value="kalın">Kalın</option>
@@ -197,6 +222,7 @@ export default function SiparisFormSayfasi() {
                 <p className="toplam-fiyat">Toplam Fiyat: {fiyat} ₺</p>
               </div>
             </div>
+            <button>Sipariş Ver</button>
           </form>
         </div>
       </section>
