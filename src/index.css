@@ -12,7 +12,20 @@ html {
   min-width: 100%;
   padding: 0;
 }
-
+button {
+  margin: 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  border: none;
+  background-color: #410a74;
+  color: white;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+button:hover {
+  background-color: #6d3b9b;
+}
 header {
   height: 10rem;
   display: flex;
@@ -24,7 +37,7 @@ header {
 }
 
 .header-container {
-  width: 50%;
+  width: 40%;
   background-color: #ce28c6;
   padding: 1rem;
   box-sizing: border-box;
@@ -39,10 +52,12 @@ section {
 }
 
 .section-container {
-  width: 50%;
+  width: 40%;
   background-color: rgb(185, 187, 44);
   padding: 1rem;
   box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
 }
 
 h2 {
@@ -58,11 +73,15 @@ h2 {
 .section-container p {
   text-align: left;
 }
-
+form {
+  display: flex;
+  flex-direction: column;
+}
 .form-boyut-kalınlık {
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
+  margin-top: 0.5rem;
 }
 
 .boyut-form {
@@ -75,7 +94,7 @@ h2 {
 }
 
 .form-malzemeler {
-  margin-top: 2rem;
+  margin-top: 0.5rem;
   text-align: left;
 }
 
@@ -94,6 +113,9 @@ h2 {
   display: block;
   padding-top: 0.5rem;
 }
+.form-not {
+  margin-top: 0.5rem;
+}
 .not-form {
   display: flex;
   flex-direction: column;
@@ -102,12 +124,21 @@ h2 {
   text-align: left;
   padding: 0.5rem 0;
 }
+.form-adet {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: space-evenly;
+}
+.fiyat-bilgi {
+  border: 1px solid black;
+  padding: 0.5rem;
+}
 @media only screen and (max-width: 600px) {
   .header-container,
   .section-container {
     width: 100%;
   }
   .malzeme {
-    width: 50%; /* Desktop'ta en fazla 5 adet alt alta */
+    width: 50%;
   }
 }
