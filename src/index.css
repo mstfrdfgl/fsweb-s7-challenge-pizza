@@ -33,7 +33,7 @@ button {
 button:hover {
   background-color: #6d3b9b;
 }
-header {
+/* header {
   height: 10rem;
   display: flex;
   flex-direction: column;
@@ -41,7 +41,7 @@ header {
   align-items: center;
   color: white;
   background-color: #ce2829;
-}
+} */
 
 .header-container {
   width: 40%;

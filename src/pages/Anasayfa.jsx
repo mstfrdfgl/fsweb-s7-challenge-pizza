@@ -2,6 +2,7 @@ import styled from "styled-components";
 import "../anasayfa.css";
 import { Link, Route, Switch } from "react-router-dom";
 import SiparisFormSayfasi from "./SiparisFormSayfasi";
+import Header from "../components/Header";
 const Button = styled.button`
   background-color: #fdc913;
   color: white;
@@ -26,7 +27,6 @@ export default function Anasayfa() {
     <>
       <div className="anasayfa-container">
         <div className="anasayfa-header">
-          <h1 className="padd">Teknolojik Yemekler</h1>
           <Span>fırsatı kaçırma</Span>
           <span className="padd bigfont">KOD ACIKTIRIR</span>
           <span className="padd bigfont">PİZZA, DOYURUR</span>

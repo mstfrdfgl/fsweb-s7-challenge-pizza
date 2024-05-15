@@ -1,5 +1,7 @@
 import axios from "axios";
-import react, { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
+import Header from "../components/Header";
+import { Link, useHistory } from "react-router-dom";
 
 export default function SiparisFormSayfasi() {
   const [boyut, setBoyut] = useState("orta");
@@ -24,6 +26,7 @@ export default function SiparisFormSayfasi() {
   const [adet, setAdet] = useState(1);
   const [siparisId, setSiparisId] = useState(null);
   const [siparisTarih, setSiparisTarih] = useState("");
+  const history = useHistory();
   const adetArttir = (event) => {
     event.preventDefault();
     setAdet(adet + 1);
@@ -46,24 +49,26 @@ export default function SiparisFormSayfasi() {
     yeniFiyat *= adet;
     setFiyat(yeniFiyat);
   }, [adet, boyut, malzemeler]);
-  function handleBoyutChange(event) {
-    setBoyut(event.target.value);
-  }
-  function handleKalınlıkChange(event) {
-    setKalınlık(event.target.value);
-  }
-  function handleMalzemeChange(event) {
-    const { name, checked } = event.target;
-    const seciliMalzemeler = { ...malzemeler, [name]: checked };
-    const malzemeSayisi =
-      Object.values(seciliMalzemeler).filter(Boolean).length;
-    if (malzemeSayisi >= 4 && malzemeSayisi <= 10) {
-      setMalzemeler(seciliMalzemeler);
+
+  function handleChange(event) {
+    const { name, value, type, checked } = event.target;
+
+    if (type === "radio" && name === "boyut") {
+      setBoyut(value);
+    } else if (type === "select-one" && name === "kalınlık") {
+      setKalınlık(value);
+    } else if (type === "checkbox") {
+      const seciliMalzemeler = { ...malzemeler, [name]: checked };
+      const malzemeSayisi =
+        Object.values(seciliMalzemeler).filter(Boolean).length;
+      if (malzemeSayisi >= 4 && malzemeSayisi <= 10) {
+        setMalzemeler(seciliMalzemeler);
+      }
+    } else if (name === "not") {
+      setNot(value);
     }
   }
-  function handleNotChange(event) {
-    setNot(event.target.value);
-  }
+
   function handleSubmit(event) {
     event.preventDefault();
 
@@ -79,9 +84,14 @@ export default function SiparisFormSayfasi() {
     axios
       .post("https://reqres.in/api/pizza", siparis)
       .then((res) => {
+        console.log("Yanıt:", res.data);
         setSiparisId(res.data.id);
         setSiparisTarih(res.data.createdAt);
-        console.log("Yanıt:", res.data);
+        history.push({
+          pathname: "siparis-onay",
+          state: { siparisId: res.data.id, siparis },
+        });
+        resetForm();
       })
       .catch((err) => {
         console.error("Hata:", err);
@@ -89,20 +99,14 @@ export default function SiparisFormSayfasi() {
   }
   return (
     <>
-      <header>
-        <div className="header-container">
-          <h1>Teknolojik Yemekler</h1>
-          <div>path</div>
-        </div>
-      </header>
       <section>
         <div className="section-container">
           <div className="info">
             <h2>Position Absolute Acı Pizza</h2>
             <div className="bilgi">
               <span className="bold">{fiyat} ₺</span>
-              <span>(yıldız)</span>
-              <span>yorum sayısı</span>
+              <span>4.5</span>
+              <span>(1907)</span>
             </div>
             <p className="small">
               Lorem ipsum dolor sit, amet consectetur adipisicing elit. Pariatur
@@ -124,7 +128,7 @@ export default function SiparisFormSayfasi() {
                       value="küçük"
                       name="boyut"
                       checked={boyut === "küçük"}
-                      onChange={handleBoyutChange}
+                      onChange={handleChange}
                     />
                     Küçük
                   </label>
@@ -136,7 +140,7 @@ export default function SiparisFormSayfasi() {
                       value="orta"
                       name="boyut"
                       checked={boyut === "orta"}
-                      onChange={handleBoyutChange}
+                      onChange={handleChange}
                     />
                     Orta
                   </label>
@@ -148,7 +152,7 @@ export default function SiparisFormSayfasi() {
                       value="büyük"
                       name="boyut"
                       checked={boyut === "büyük"}
-                      onChange={handleBoyutChange}
+                      onChange={handleChange}
                     />
                     Büyük
                   </label>
@@ -159,7 +163,11 @@ export default function SiparisFormSayfasi() {
                   Hamur Seç <span className="zorunlu">*</span>
                 </label>
                 <div className="form-group">
-                  <select value={kalınlık} onChange={handleKalınlıkChange}>
+                  <select
+                    name="kalınlık"
+                    value={kalınlık}
+                    onChange={handleChange}
+                  >
                     <option value="ince">İnce</option>
                     <option value="normal">Normal</option>
                     <option value="kalın">Kalın</option>
@@ -171,7 +179,7 @@ export default function SiparisFormSayfasi() {
               <div className="malzemeler-form">
                 <label className="bold">Ek Malzemeler</label>
                 <label className="small">
-                  En fazla 10 malzeme seçebilirsiniz. 5₺
+                  En az 4,en fazla 10 malzeme seçebilirsiniz. 5₺
                 </label>
               </div>
               <div className="malzemeler">
@@ -182,7 +190,7 @@ export default function SiparisFormSayfasi() {
                         type="checkbox"
                         name={malzeme}
                         checked={secildi}
-                        onChange={handleMalzemeChange}
+                        onChange={handleChange}
                       />
                       {malzeme}
                     </label>
@@ -201,7 +209,8 @@ export default function SiparisFormSayfasi() {
                   placeholder="Siparişine eklemek istediğin bir not var mı?"
                   rows="4"
                   cols="50"
-                  onChange={handleNotChange}
+                  value={not}
+                  onChange={handleChange}
                 ></textarea>
               </div>
             </div>
@@ -222,7 +231,14 @@ export default function SiparisFormSayfasi() {
                 <p className="toplam-fiyat">Toplam Fiyat: {fiyat} ₺</p>
               </div>
             </div>
-            <button>Sipariş Ver</button>
+            <Link
+              to={{
+                pathname: "siparis-onay",
+                state: { boyut, kalınlık, malzemeler, malzemeFiyati, fiyat },
+              }}
+            >
+              <button>Sipariş Ver</button>
+            </Link>
           </form>
         </div>
       </section>

@@ -1,5 +1,7 @@
 import styled from "styled-components";
-
+import SiparisFormSayfasi from "./SiparisFormSayfasi";
+import { useLocation } from "react-router-dom";
+import Header from "../components/Header";
 const Container = styled.div`
   display: flex;
   flex-direction: column;
@@ -29,15 +31,27 @@ const Hr = styled.hr`
   width: 100%;
 `;
 export default function SiparisOnaySayfasi() {
+  const location = useLocation();
+  const { boyut, kalınlık, malzemeler, malzemeFiyati, fiyat } =
+    location.state || {};
   return (
     <>
       <Container className="siparis-onay-container">
         <Section>
-          <h1>Teknolojik Yemekler</h1>
           <Span className="padd">lezzetin yolda</Span>
           <span className="padd bigfont">SİPARİŞ ALINDI</span>
           <Hr />
           <h2 className="padd">Position Absolute Acı Pizza</h2>
+          <p>Boyut: {boyut}</p>
+          <p>Hamur Kalınlığı: {kalınlık}</p>
+          <p>
+            Malzemeler:{" "}
+            {Object.keys(malzemeler)
+              .filter((malzeme) => malzemeler[malzeme])
+              .join(", ")}
+          </p>
+          <p>Malzeme Fiyatı: {malzemeFiyati} ₺</p>
+          <p>Toplam Fiyat: {fiyat} ₺</p>
         </Section>
       </Container>
     </>

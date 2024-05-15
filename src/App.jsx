@@ -4,11 +4,12 @@ import SiparisFormSayfasi from "./pages/SiparisFormSayfasi";
 import SiparisOnaySayfasi from "./pages/SiparisOnaySayfasi";
 import { Router, Switch, Route, BrowserRouter } from "react-router-dom";
 import "./App.css";
+import Header from "./components/Header";
 
 function App() {
   return (
     <>
-      {" "}
+      <Header />{" "}
       <BrowserRouter>
         <Switch>
           <Route exact path="/" component={Anasayfa} />
