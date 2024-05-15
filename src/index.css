@@ -24,14 +24,15 @@ button {
   padding: 0.5rem 1rem;
   border-radius: 0.5rem;
   border: none;
-  background-color: #410a74;
+  background-color: #fdc913;
   color: white;
   font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
+  transition: 0.25s;
 }
 button:hover {
-  background-color: #6d3b9b;
+  background-color: #2b2db4;
 }
 /* header {
   height: 10rem;
@@ -114,6 +115,9 @@ form {
   width: 33%;
   padding: 0.5rem 0;
   box-sizing: border-box;
+}
+.form-isim-soyisim {
+  text-align: left;
 }
 .small {
   font-size: 0.8rem;

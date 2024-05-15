@@ -24,6 +24,8 @@ export default function SiparisFormSayfasi() {
   const [not, setNot] = useState("");
   const [fiyat, setFiyat] = useState(85);
   const [adet, setAdet] = useState(1);
+  const [isimSoyisim, setIsimSoyisim] = useState("");
+  const [isimValid, setIsimValid] = useState(false);
   const [siparisId, setSiparisId] = useState(null);
   const [siparisTarih, setSiparisTarih] = useState("");
   const history = useHistory();
@@ -66,12 +68,18 @@ export default function SiparisFormSayfasi() {
       }
     } else if (name === "not") {
       setNot(value);
+    } else if (name === "isimSoyisim") {
+      setIsimSoyisim(value);
+      setIsimValid(value.trim() !== "");
     }
   }
 
   function handleSubmit(event) {
     event.preventDefault();
-
+    // if (!isimValid) {
+    //   console.log("Lütfen isim giriniz");
+    //   return;
+    // }
     const siparis = {
       boyut,
       kalınlık,
@@ -79,22 +87,23 @@ export default function SiparisFormSayfasi() {
       not,
       fiyat,
       adet,
+      isimSoyisim,
     };
 
     axios
       .post("https://reqres.in/api/pizza", siparis)
       .then((res) => {
         console.log("Yanıt:", res.data);
-        setSiparisId(res.data.id);
-        setSiparisTarih(res.data.createdAt);
+        // setSiparisId(res.data.id);
+        // setSiparisTarih(res.data.createdAt);
         history.push({
           pathname: "siparis-onay",
           state: { siparisId: res.data.id, siparis },
         });
-        resetForm();
+        // resetForm();
       })
       .catch((err) => {
-        console.error("Hata:", err);
+        console.error("Hata:", err.response.data);
       });
   }
   return (
@@ -198,6 +207,24 @@ export default function SiparisFormSayfasi() {
                 ))}
               </div>
             </div>
+            <div className="form-isim-soyisim">
+              <div className="isim-soyisim-form">
+                <label htmlFor="isimSoyisim" className="bold">
+                  İsim Soyisim:
+                </label>
+                <input
+                  type="text"
+                  id="isimSoyisim"
+                  name="isimSoyisim"
+                  placeholder="İsim ve Soyisim Giriniz"
+                  value={isimSoyisim}
+                  onChange={handleChange}
+                />
+                {!isimValid && (
+                  <p style={{ color: "red" }}>Lütfen isim giriniz.</p>
+                )}
+              </div>
+            </div>
             <div className="form-not">
               <div className="not-form">
                 <label htmlFor="not" className="not-label bold">
@@ -231,14 +258,24 @@ export default function SiparisFormSayfasi() {
                 <p className="toplam-fiyat">Toplam Fiyat: {fiyat} ₺</p>
               </div>
             </div>
+            <button disabled={!isimSoyisim.trim()}>Sipariş Ver</button>
             <Link
               to={{
-                pathname: "siparis-onay",
-                state: { boyut, kalınlık, malzemeler, malzemeFiyati, fiyat },
+                pathname: "/siparis-onay",
+                state: {
+                  siparisId: null,
+                  siparis: {
+                    boyut,
+                    kalınlık,
+                    malzemeler,
+                    not,
+                    fiyat,
+                    adet,
+                    isimSoyisim,
+                  },
+                },
               }}
-            >
-              <button>Sipariş Ver</button>
-            </Link>
+            ></Link>
           </form>
         </div>
       </section>

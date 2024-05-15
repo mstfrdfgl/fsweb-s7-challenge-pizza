@@ -9,6 +9,7 @@ const Head = styled.h1`
   color: white;
   background-color: #ce2829;
   margin: 0;
+  font-weight: bolder;
 `;
 export default function Header() {
   return <Head>Teknolojik Yemekler</Head>;
