@@ -1,9 +1,3 @@
-.anasayfa-container {
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  color: white;
-}
 .anasayfa-header {
   background-image: url("../Assets/mile1-assets/home-banner.png");
   background-position: center;

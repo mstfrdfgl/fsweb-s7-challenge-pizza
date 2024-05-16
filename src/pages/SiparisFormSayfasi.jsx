@@ -50,7 +50,7 @@ export default function SiparisFormSayfasi() {
     yeniFiyat += malzemeFiyati;
     yeniFiyat *= adet;
     setFiyat(yeniFiyat);
-  }, [adet, boyut, malzemeler]);
+  }, [adet, boyut, malzemeler, malzemeFiyati]);
 
   function handleChange(event) {
     const { name, value, type, checked } = event.target;
@@ -88,6 +88,7 @@ export default function SiparisFormSayfasi() {
       fiyat,
       adet,
       isimSoyisim,
+      malzemeFiyati,
     };
 
     axios
@@ -272,6 +273,7 @@ export default function SiparisFormSayfasi() {
                     fiyat,
                     adet,
                     isimSoyisim,
+                    malzemeFiyati,
                   },
                 },
               }}

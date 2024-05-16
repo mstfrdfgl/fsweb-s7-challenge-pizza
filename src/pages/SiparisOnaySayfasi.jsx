@@ -9,10 +9,11 @@ const Container = styled.div`
   justify-content: flex-start;
   align-items: center;
   width: 100%;
-  height: 100vh;
+  height: 100%;
   background-color: #ce2829;
   color: white;
   font-family: "Roboto Condensed";
+  box-sizing: border-box;
 `;
 const Section = styled.section`
   display: flex;
@@ -26,7 +27,6 @@ const Section = styled.section`
 `;
 
 const Hr = styled.hr`
-  border-top: 1px solid #5f5f5f;
   width: 100%;
 `;
 
@@ -35,6 +35,24 @@ const FormOnayDiv = styled.div`
   flex-direction: column;
   justify-content: center;
   text-align: left;
+  width: 15rem;
+`;
+
+const BoldSpan = styled.span`
+  font-weight: bold;
+`;
+
+const LigthSpan = styled.span`
+  font-weight: 200;
+`;
+
+const FiyatBorderDiv = styled.div`
+  border: 0.5px solid white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 1rem;
+  padding: 1rem;
 `;
 export default function SiparisOnaySayfasi() {
   const location = useLocation();
@@ -51,17 +69,37 @@ export default function SiparisOnaySayfasi() {
           <Hr />
           <h2 className="padd">Position Absolute Acı Pizza</h2>
           <FormOnayDiv>
-            <p>İsim Soyisim: {isimSoyisim}</p>
-            <p>Boyut: {boyut}</p>
-            <p>Hamur Kalınlığı: {kalınlık}</p>
             <p>
-              Malzemeler:{" "}
-              {Object.keys(malzemeler)
-                .filter((malzeme) => malzemeler[malzeme])
-                .join(", ")}
+              <LigthSpan>İsim Soyisim: </LigthSpan>
+              <BoldSpan>{isimSoyisim}</BoldSpan>
             </p>
-            <p>Malzeme Fiyatı: {malzemeFiyati} ₺</p>
-            <p>Toplam Fiyat: {fiyat} ₺</p>
+            <p>
+              <LigthSpan>Boyut: </LigthSpan>
+              <BoldSpan>{boyut}</BoldSpan>
+            </p>
+            <p>
+              <LigthSpan>Hamur Kalınlığı: </LigthSpan>
+              <BoldSpan>{kalınlık}</BoldSpan>
+            </p>
+            <p>
+              <LigthSpan>Malzemeler: </LigthSpan>
+              <BoldSpan>
+                {Object.keys(malzemeler)
+                  .filter((malzeme) => malzemeler[malzeme])
+                  .join(", ")}
+              </BoldSpan>
+            </p>
+            <FiyatBorderDiv>
+              <BoldSpan>Sipariş Toplamı</BoldSpan>
+              <p>
+                <LigthSpan>Malzeme Fiyatı: </LigthSpan>
+                <BoldSpan>{malzemeFiyati} ₺</BoldSpan>
+              </p>
+              <p>
+                <LigthSpan>Toplam Fiyat: </LigthSpan>
+                <BoldSpan>{fiyat} ₺</BoldSpan>
+              </p>
+            </FiyatBorderDiv>
           </FormOnayDiv>
         </Section>
       </Container>
