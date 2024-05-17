@@ -21,14 +21,15 @@ const StyledNavLink = styled(NavLink)`
 
 const Ul = styled.ul`
   display: flex;
-  flex-flow: row wrap;
-  justify-content: center;
   list-style: none;
   margin: 0;
-
+  padding: 0;
+  justify-content: center;
+  width: 70%;
+  gap: 1rem;
   @media (max-width: 600px) {
-    justify-content: space-around;
-    flex-flow: column wrap;
+    justify-content: flex-start;
+    flex-flow: column;
     padding: 0;
     align-items: flex-start;
   }
@@ -37,6 +38,7 @@ const Ul = styled.ul`
 const Li = styled.li`
   display: flex;
   align-items: center;
+  border-radius: 1.5rem;
 `;
 
 const IconImg = styled.img`
@@ -44,7 +46,17 @@ const IconImg = styled.img`
   height: 1.5rem;
 `;
 
-const NavDiv = styled.div``;
+const NavDiv = styled.div`
+  display: flex;
+  width: 70%;
+  justify-content: center;
+  align-items: center;
+  padding: 0.5rem;
+  text-align: center;
+  @media (max-width: 600px) {
+    width: 100%;
+  }
+`;
 
 function Navigation(args) {
   const [isOpen, setIsOpen] = useState(false);
@@ -61,22 +73,14 @@ function Navigation(args) {
   ];
 
   return (
-    <NavDiv>
-      {/* <StyledNavbar color="dark" dark expand="md" {...args}> */}
-      {/* <Collapse isOpen={isOpen} navbar> */}
-      {/* <Nav className="me-auto" navbar> */}
-      <Ul>
-        {navItems.map((item, index) => (
-          <Li key={index}>
-            <IconImg src={item.icon} alt={item.text} />
-            <StyledNavLink href={item.href}>{item.text}</StyledNavLink>
-          </Li>
-        ))}
-      </Ul>
-      {/* </Nav> */}
-      {/* </Collapse> */}
-      {/* </StyledNavbar> */}
-    </NavDiv>
+    <Ul>
+      {navItems.map((item, index) => (
+        <Li key={index}>
+          <IconImg src={item.icon} alt={item.text} />
+          <StyledNavLink href={item.href}>{item.text}</StyledNavLink>
+        </Li>
+      ))}
+    </Ul>
   );
 }
 
