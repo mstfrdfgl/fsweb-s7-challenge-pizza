@@ -3,7 +3,12 @@ import React, { useEffect, useState } from "react";
 import Header from "../components/Header";
 import { Link, useHistory } from "react-router-dom";
 import { SectionContainer } from "../components/Styled";
-
+import Boyut from "../forminputs/Boyut";
+import Kalinlik from "../forminputs/Kalinlik";
+import Malzeme from "../forminputs/Malzeme";
+import IsimSoyisim from "../forminputs/IsimSoyisim";
+import Not from "../forminputs/Not";
+import Adet from "../forminputs/Adet";
 export default function SiparisFormSayfasi() {
   const [boyut, setBoyut] = useState("orta");
   const [kalınlık, setKalınlık] = useState("normal");
@@ -121,140 +126,23 @@ export default function SiparisFormSayfasi() {
           </div>
           <form onSubmit={handleSubmit}>
             <div className="form-boyut-kalınlık">
-              <div className="boyut-form">
-                <label className="boyut-label bold">
-                  Boyut Seç <span className="zorunlu">*</span>
-                </label>
-                <div className="radios">
-                  <div className="radio-group">
-                    <label className="radio-label">
-                      <input
-                        type="radio"
-                        value="küçük"
-                        name="boyut"
-                        checked={boyut === "küçük"}
-                        onChange={handleChange}
-                      />
-                      Küçük
-                    </label>
-                  </div>
-                  <div className="radio-group">
-                    <label className="radio-label">
-                      <input
-                        type="radio"
-                        value="orta"
-                        name="boyut"
-                        checked={boyut === "orta"}
-                        onChange={handleChange}
-                      />
-                      Orta
-                    </label>
-                  </div>
-                  <div className="radio-group">
-                    <label className="radio-label">
-                      <input
-                        type="radio"
-                        value="büyük"
-                        name="boyut"
-                        checked={boyut === "büyük"}
-                        onChange={handleChange}
-                      />
-                      Büyük
-                    </label>
-                  </div>
-                </div>
-              </div>
-              <div className="kalınlık-form">
-                <label className="bold">
-                  Hamur Seç <span className="zorunlu">*</span>
-                </label>
-                <div className="form-group">
-                  <select
-                    name="kalınlık"
-                    value={kalınlık}
-                    onChange={handleChange}
-                  >
-                    <option value="ince">İnce</option>
-                    <option value="normal">Normal</option>
-                    <option value="kalın">Kalın</option>
-                  </select>
-                </div>
-              </div>
+              <Boyut boyut={boyut} handleChange={handleChange} />
+              <Kalinlik kalınlık={kalınlık} handleChange={handleChange} />
             </div>
-            <div className="form-malzemeler">
-              <div className="malzemeler-form">
-                <label className="bold">Ek Malzemeler</label>
-                <label className="small">
-                  En az 4,en fazla 10 malzeme seçebilirsiniz. 5₺
-                </label>
-              </div>
-              <div className="malzemeler">
-                {Object.entries(malzemeler).map(([malzeme, secildi]) => (
-                  <div key={malzeme} className="form-group malzeme">
-                    <label className="malzeme-label">
-                      <input
-                        type="checkbox"
-                        name={malzeme}
-                        checked={secildi}
-                        onChange={handleChange}
-                      />
-                      {malzeme}
-                    </label>
-                  </div>
-                ))}
-              </div>
-            </div>
-            <div className="form-isim-soyisim">
-              <div className="isim-soyisim-form">
-                <label htmlFor="isimSoyisim" className="bold">
-                  İsim Soyisim:
-                </label>
-                <input
-                  type="text"
-                  id="isimSoyisim"
-                  name="isimSoyisim"
-                  placeholder="İsim ve Soyisim Giriniz"
-                  value={isimSoyisim}
-                  onChange={handleChange}
-                />
-                {!isimValid && (
-                  <p style={{ color: "#ce2829" }}>Lütfen isim giriniz.</p>
-                )}
-              </div>
-            </div>
-            <div className="form-not">
-              <div className="not-form">
-                <label htmlFor="not" className="not-label bold">
-                  Sipariş Notu
-                </label>
-                <textarea
-                  id="not"
-                  name="not"
-                  placeholder="Siparişine eklemek istediğin bir not var mı?"
-                  rows="4"
-                  cols="50"
-                  value={not}
-                  onChange={handleChange}
-                ></textarea>
-              </div>
-            </div>
-            <div className="form-adet">
-              <div className="adet-buton">
-                <button className="azalt" onClick={adetAzalt}>
-                  -
-                </button>
-                <span className="adet">{adet}</span>
-                <button className="arttir" onClick={adetArttir}>
-                  +
-                </button>
-              </div>
-              <div className="fiyat-bilgi">
-                <p className="malzeme-fiyat">
-                  Ek Malzemeler: {malzemeFiyati} ₺
-                </p>
-                <p className="toplam-fiyat zorunlu">Toplam Fiyat: {fiyat} ₺</p>
-              </div>
-            </div>
+            <Malzeme malzemeler={malzemeler} handleChange={handleChange} />
+            <IsimSoyisim
+              isimSoyisim={isimSoyisim}
+              handleChange={handleChange}
+              isimValid={isimValid}
+            />
+            <Not not={not} handleChange={handleChange} />
+            <Adet
+              adet={adet}
+              adetArttir={adetArttir}
+              adetAzalt={adetAzalt}
+              malzemeFiyati={malzemeFiyati}
+              fiyat={fiyat}
+            />
             <button disabled={!isimSoyisim.trim()}>Sipariş Ver</button>
             <Link
               to={{

@@ -47,6 +47,14 @@ const ImageItem = styled.img`
   margin-bottom: 0.5rem;
 `;
 export default function Footer() {
+  const images = [
+    "../../Assets/mile2-aseets/footer/insta/li-0.png",
+    "../../Assets/mile2-aseets/footer/insta/li-1.png",
+    "../../Assets/mile2-aseets/footer/insta/li-2.png",
+    "../../Assets/mile2-aseets/footer/insta/li-3.png",
+    "../../Assets/mile2-aseets/footer/insta/li-4.png",
+    "../../Assets/mile2-aseets/footer/insta/li-5.png",
+  ];
   return (
     <>
       <Foot>
@@ -77,12 +85,9 @@ export default function Footer() {
         <FooterSection>
           <FooterTitle>Instagram</FooterTitle>
           <Images>
-            <ImageItem src="../../Assets/mile2-aseets/footer/insta/li-0.png" />
-            <ImageItem src="../../Assets/mile2-aseets/footer/insta/li-1.png" />
-            <ImageItem src="../../Assets/mile2-aseets/footer/insta/li-2.png" />
-            <ImageItem src="../../Assets/mile2-aseets/footer/insta/li-3.png" />
-            <ImageItem src="../../Assets/mile2-aseets/footer/insta/li-4.png" />
-            <ImageItem src="../../Assets/mile2-aseets/footer/insta/li-5.png" />
+            {images.map((src, index) => (
+              <ImageItem key={index} src={src} />
+            ))}
           </Images>
         </FooterSection>
       </Foot>

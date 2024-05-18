@@ -3,7 +3,7 @@ describe("SiparisFormSayfasi", () => {
     cy.visit("http://localhost:5173/siparis-form");
   });
 
-  it("Sipariş formu doldurulabilir", () => {
+  it("form dolduruldu", () => {
     cy.get('input[name="isimSoyisim"]').type("Mustafa Redifoğlu");
 
     cy.get('input[value="büyük"]').check();
