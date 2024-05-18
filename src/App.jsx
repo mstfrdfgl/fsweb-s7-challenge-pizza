@@ -5,6 +5,7 @@ import SiparisOnaySayfasi from "./pages/SiparisOnaySayfasi";
 import { Router, Switch, Route, BrowserRouter } from "react-router-dom";
 import "./App.css";
 import Header from "./components/Header";
+import Footer from "./components/Footer";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Route path="/siparis-onay" component={SiparisOnaySayfasi} />
         </Switch>
       </BrowserRouter>
+      <Footer />
     </>
   );
 }

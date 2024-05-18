@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import Navigation from "../components/Navbar";
+import CardElement from "../components/Card";
 
 const Container = styled.div`
   display: flex;
@@ -18,7 +19,7 @@ const Header = styled.header`
   width: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   color: white;
   text-align: center;
@@ -61,6 +62,7 @@ const SectionA = styled.section`
   margin: 6rem 0;
   gap: 1rem;
   align-items: stretch;
+  font-family: "Roboto Condensed";
   @media (max-width: 600px) {
     flex-direction: column;
     align-items: stretch;
@@ -124,35 +126,11 @@ const SectionB = styled.section`
   display: flex;
   flex-direction: column;
   margin-bottom: 2rem;
+  font-family: "Roboto Condensed";
 `;
 const SectionBSpan = styled.span`
   font-size: 1.7rem;
   font-weight: bold;
-`;
-const Footer = styled.footer`
-  background-color: #333;
-  color: white;
-  width: 100%;
-  display: flex;
-  justify-content: space-around;
-  padding: 2rem 0;
-  flex-wrap: wrap;
-`;
-
-const FooterSection = styled.div`
-  flex: 1;
-  min-width: 200px;
-  margin: 1rem;
-`;
-
-const FooterTitle = styled.h3`
-  border-bottom: 2px solid #fdc913;
-  padding-bottom: 0.5rem;
-  margin-bottom: 1rem;
-`;
-
-const FooterItem = styled.p`
-  margin: 0.5rem 0;
 `;
 
 function Anasayfa() {
@@ -195,27 +173,7 @@ function Anasayfa() {
         <SectionBSpan>Acıktıran Kodlara Doyuran Lezzetler</SectionBSpan>
       </SectionB>
       <Navigation />
-      <Footer>
-        <FooterSection>
-          <FooterTitle>Teknolojik Yemekler</FooterTitle>
-          <FooterItem>341 Londonderry Road, Istanbul Türkiye</FooterItem>
-          <FooterItem>aciktim@teknolojikyemekler.com</FooterItem>
-          <FooterItem>+90 216 123 45 67</FooterItem>
-        </FooterSection>
-        <FooterSection>
-          <FooterTitle>Sıcak Menüler</FooterTitle>
-          <FooterItem>Terminal Pizza</FooterItem>
-          <FooterItem>5 Kişilik Hackathlon Pizza</FooterItem>
-          <FooterItem>useEffect Tavuklu Pizza</FooterItem>
-          <FooterItem>Beyaz Console Frosty</FooterItem>
-          <FooterItem>Tester Geçti Mutlu Burger</FooterItem>
-          <FooterItem>Position Absolute Acı Burger</FooterItem>
-        </FooterSection>
-        <FooterSection>
-          <FooterTitle>Instagram</FooterTitle>
-          {/* Instagram görselleri burada */}
-        </FooterSection>
-      </Footer>
+      <CardElement />
     </Container>
   );
 }

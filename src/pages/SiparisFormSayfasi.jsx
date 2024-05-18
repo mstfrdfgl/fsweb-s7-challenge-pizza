@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import Header from "../components/Header";
 import { Link, useHistory } from "react-router-dom";
+import { SectionContainer } from "../components/Styled";
 
 export default function SiparisFormSayfasi() {
   const [boyut, setBoyut] = useState("orta");
@@ -76,10 +77,6 @@ export default function SiparisFormSayfasi() {
 
   function handleSubmit(event) {
     event.preventDefault();
-    // if (!isimValid) {
-    //   console.log("Lütfen isim giriniz");
-    //   return;
-    // }
     const siparis = {
       boyut,
       kalınlık,
@@ -95,13 +92,10 @@ export default function SiparisFormSayfasi() {
       .post("https://reqres.in/api/pizza", siparis)
       .then((res) => {
         console.log("Yanıt:", res.data);
-        // setSiparisId(res.data.id);
-        // setSiparisTarih(res.data.createdAt);
         history.push({
           pathname: "siparis-onay",
           state: { siparisId: res.data.id, siparis },
         });
-        // resetForm();
       })
       .catch((err) => {
         console.error("Hata:", err.response.data);
@@ -115,7 +109,7 @@ export default function SiparisFormSayfasi() {
             <h2>Position Absolute Acı Pizza</h2>
             <div className="bilgi">
               <span className="bold">{fiyat} ₺</span>
-              <span>4.5</span>
+              <span>4.9</span>
               <span>(1907)</span>
             </div>
             <p className="small">
@@ -131,41 +125,43 @@ export default function SiparisFormSayfasi() {
                 <label className="boyut-label bold">
                   Boyut Seç <span className="zorunlu">*</span>
                 </label>
-                <div className="form-group">
-                  <label>
-                    <input
-                      type="radio"
-                      value="küçük"
-                      name="boyut"
-                      checked={boyut === "küçük"}
-                      onChange={handleChange}
-                    />
-                    Küçük
-                  </label>
-                </div>
-                <div className="form-group">
-                  <label>
-                    <input
-                      type="radio"
-                      value="orta"
-                      name="boyut"
-                      checked={boyut === "orta"}
-                      onChange={handleChange}
-                    />
-                    Orta
-                  </label>
-                </div>
-                <div className="form-group">
-                  <label>
-                    <input
-                      type="radio"
-                      value="büyük"
-                      name="boyut"
-                      checked={boyut === "büyük"}
-                      onChange={handleChange}
-                    />
-                    Büyük
-                  </label>
+                <div className="radios">
+                  <div className="radio-group">
+                    <label className="radio-label">
+                      <input
+                        type="radio"
+                        value="küçük"
+                        name="boyut"
+                        checked={boyut === "küçük"}
+                        onChange={handleChange}
+                      />
+                      Küçük
+                    </label>
+                  </div>
+                  <div className="radio-group">
+                    <label className="radio-label">
+                      <input
+                        type="radio"
+                        value="orta"
+                        name="boyut"
+                        checked={boyut === "orta"}
+                        onChange={handleChange}
+                      />
+                      Orta
+                    </label>
+                  </div>
+                  <div className="radio-group">
+                    <label className="radio-label">
+                      <input
+                        type="radio"
+                        value="büyük"
+                        name="boyut"
+                        checked={boyut === "büyük"}
+                        onChange={handleChange}
+                      />
+                      Büyük
+                    </label>
+                  </div>
                 </div>
               </div>
               <div className="kalınlık-form">
@@ -222,7 +218,7 @@ export default function SiparisFormSayfasi() {
                   onChange={handleChange}
                 />
                 {!isimValid && (
-                  <p style={{ color: "red" }}>Lütfen isim giriniz.</p>
+                  <p style={{ color: "#ce2829" }}>Lütfen isim giriniz.</p>
                 )}
               </div>
             </div>
@@ -256,7 +252,7 @@ export default function SiparisFormSayfasi() {
                 <p className="malzeme-fiyat">
                   Ek Malzemeler: {malzemeFiyati} ₺
                 </p>
-                <p className="toplam-fiyat">Toplam Fiyat: {fiyat} ₺</p>
+                <p className="toplam-fiyat zorunlu">Toplam Fiyat: {fiyat} ₺</p>
               </div>
             </div>
             <button disabled={!isimSoyisim.trim()}>Sipariş Ver</button>

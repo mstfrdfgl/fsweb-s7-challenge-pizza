@@ -13,6 +13,7 @@ const StyledNavLink = styled(NavLink)`
   display: block;
   padding: 1em;
   color: black;
+  font-family: "Roboto Condensed";
   @media (max-width: 600px) {
     text-align: center;
     padding: 0.5rem;
@@ -25,7 +26,7 @@ const Ul = styled.ul`
   margin: 0;
   padding: 0;
   justify-content: center;
-  width: 70%;
+  width: 60%;
   gap: 1rem;
   @media (max-width: 600px) {
     justify-content: flex-start;

@@ -11,3 +11,11 @@ export const BigFontSpan = styled.span`
   font-family: "Roboto Condensed";
   font-weight: 300;
 `;
+export const SectionContainer = styled.section`
+  width: 40%;
+  /* background-color: rgb(185, 187, 44); */
+  padding: 1rem;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+`;

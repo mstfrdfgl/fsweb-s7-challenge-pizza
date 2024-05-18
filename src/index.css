@@ -46,7 +46,7 @@ button:hover {
 
 .header-container {
   width: 40%;
-  /* background-color: #ce28c6; */
+
   padding: 1rem;
   box-sizing: border-box;
 }
@@ -56,12 +56,12 @@ section {
   display: flex;
   justify-content: center;
   align-items: center;
-  /* background-color: #1db368; */
+  font-family: "Roboto Condensed";
 }
 
 .section-container {
   width: 40%;
-  /* background-color: rgb(185, 187, 44); */
+
   padding: 1rem;
   box-sizing: border-box;
   display: flex;
@@ -92,11 +92,54 @@ form {
   margin-top: 0.5rem;
 }
 
+.radio-label {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+.radios {
+  display: flex;
+  padding-top: 1rem;
+}
+input[type="radio"] {
+  appearance: none; /* Hides default radio button appearance */
+  width: 2rem; /* Radio button size */
+  height: 2rem; /* Radio button size */
+  border: 2px solid #ccc; /* Radio button border */
+  border-radius: 50%; /* Radio button shape */
+  cursor: pointer; /* Pointer cursor on hover */
+  /* Transition effect for background color */
+}
+input[type="radio"]:checked {
+  background-color: #fdc913; /* Yellow background color for checked radio button */
+  border-color: #fdc913; /* Yellow border color for checked radio button */
+}
+.boyut-label {
+  margin-left: 5px; /* Spacing between radio button and label */
+  font-size: 14px; /* Label font size */
+}
+.boyut-form {
+  display: flex; /* Arrange radio buttons in a row */
+  flex-direction: column; /* Align radio buttons horizontally */
+  margin-bottom: 15px; /* Spacing between radio groups */
+}
 .boyut-form {
   text-align: left;
   padding-bottom: 1rem;
 }
 
+select {
+  appearance: none;
+  width: 150px;
+  height: 30px;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 0.5rem;
+  font-size: 14px;
+  cursor: pointer;
+  background-color: #faf7f2;
+  margin-top: 1rem;
+}
 .kalınlık-form {
   text-align: left;
 }
@@ -110,14 +153,48 @@ form {
   display: flex;
   flex-wrap: wrap;
 }
+input[type="checkbox"] {
+  appearance: none;
+  width: 2rem;
+  height: 2rem;
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  cursor: pointer;
+}
+input[type="checkbox"]:checked {
+  background-color: #fdc913;
+  border-color: #fdc913;
+}
+
+.malzeme-label {
+  font-size: 1rem;
+  cursor: pointer;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
 
 .malzeme {
   width: 33%;
   padding: 0.5rem 0;
   box-sizing: border-box;
+  background-color: #faf7f2;
+  border-radius: 5px;
 }
 .form-isim-soyisim {
   text-align: left;
+}
+input[type="text"] {
+  width: 150px;
+  height: 30px;
+  padding: 5px;
+  margin-left: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 0.8rem;
+  box-sizing: border-box;
+  background-color: #faf7f2;
 }
 .small {
   font-size: 0.8rem;
@@ -127,6 +204,9 @@ form {
 }
 .form-not {
   margin-top: 0.5rem;
+}
+textarea {
+  background-color: #faf7f2;
 }
 .not-form {
   display: flex;
@@ -142,8 +222,12 @@ form {
   justify-content: space-evenly;
 }
 .fiyat-bilgi {
-  border: 1px solid black;
+  border: 1px solid #faf7f2;
   padding: 0.5rem;
+  background-color: #faf7f2;
+}
+.zorunlu {
+  color: #ce2829;
 }
 @media only screen and (max-width: 600px) {
   .header-container,
