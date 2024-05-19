@@ -63,11 +63,14 @@ section {
   width: 40%;
 
   padding: 1rem;
+  padding-top: 0;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
 }
-
+.info {
+  background-color: #faf7f2;
+}
 h2 {
   text-align: left;
 }

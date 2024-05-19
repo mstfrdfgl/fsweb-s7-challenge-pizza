@@ -16,9 +16,7 @@ export default function IsimSoyisim({ isimSoyisim, handleChange, isimValid }) {
             value={isimSoyisim}
             onChange={handleChange}
           />
-          {!isimValid && (
-            <p style={{ color: "#ce2829" }}>Lütfen isim giriniz.</p>
-          )}
+          {!isimValid && <p style={{ color: "#ce2829" }}>En az 3 harf.</p>}
         </div>
       </div>
     </>

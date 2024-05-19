@@ -76,7 +76,7 @@ export default function SiparisFormSayfasi() {
       setNot(value);
     } else if (name === "isimSoyisim") {
       setIsimSoyisim(value);
-      setIsimValid(value.trim() !== "");
+      setIsimValid(value.trim().length >= 3);
     }
   }
 
@@ -110,6 +110,10 @@ export default function SiparisFormSayfasi() {
     <>
       <section>
         <div className="section-container">
+          <img
+            src="../../Assets/mile2-aseets/pictures/form-banner.png"
+            alt="pizza"
+          />
           <div className="info">
             <h2>Position Absolute Acı Pizza</h2>
             <div className="bilgi">
@@ -143,7 +147,7 @@ export default function SiparisFormSayfasi() {
               malzemeFiyati={malzemeFiyati}
               fiyat={fiyat}
             />
-            <button disabled={!isimSoyisim.trim()}>Sipariş Ver</button>
+            <button disabled={!isimValid}>Sipariş Ver</button>
             <Link
               to={{
                 pathname: "/siparis-onay",

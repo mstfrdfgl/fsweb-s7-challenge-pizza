@@ -25,9 +25,10 @@ const Ul = styled.ul`
   list-style: none;
   margin: 0;
   padding: 0;
-  justify-content: center;
+  justify-content: space-between;
   width: 60%;
   gap: 1rem;
+  flex-wrap: wrap;
   @media (max-width: 600px) {
     justify-content: flex-start;
     flex-flow: column;

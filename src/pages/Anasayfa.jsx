@@ -58,7 +58,7 @@ const BigFontSpan = styled.span`
 const SectionA = styled.section`
   display: flex;
   flex-wrap: wrap;
-  width: 70%;
+  width: 60%;
   margin: 6rem 0;
   gap: 1rem;
   align-items: stretch;
@@ -150,20 +150,26 @@ function Anasayfa() {
           <DivContent>
             <h2>Özel Lezzetus</h2>
             <p>Position: Absolute Acı Burger</p>
-            <Button>SİPARİŞ VER</Button>
+            <Link to="/siparis-form">
+              <Button>SİPARİŞ VER</Button>
+            </Link>
           </DivContent>
         </Divl>
         <DivrContainer>
           <Divr>
             <DivContent>
               <h2>Hackathlon Burger Menü</h2>
-              <Button>SİPARİŞ VER</Button>
+              <Link to="/siparis-form">
+                <Button>SİPARİŞ VER</Button>
+              </Link>
             </DivContent>
           </Divr>
           <Divrs>
             <DivContent>
               <h2>Çooook hızlı npm gibi kurye</h2>
-              <Button>SİPARİŞ VER</Button>
+              <Link to="/siparis-form">
+                <Button>SİPARİŞ VER</Button>
+              </Link>
             </DivContent>
           </Divrs>
         </DivrContainer>
