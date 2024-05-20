@@ -1,87 +1,129 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import Header from "../components/Header";
 import { Link, useHistory } from "react-router-dom";
-import { SectionContainer } from "../components/Styled";
 import Boyut from "../forminputs/Boyut";
 import Kalinlik from "../forminputs/Kalinlik";
 import Malzeme from "../forminputs/Malzeme";
 import IsimSoyisim from "../forminputs/IsimSoyisim";
 import Not from "../forminputs/Not";
 import Adet from "../forminputs/Adet";
+
 export default function SiparisFormSayfasi() {
-  const [boyut, setBoyut] = useState("orta");
-  const [kalınlık, setKalınlık] = useState("normal");
-  const [malzemeler, setMalzemeler] = useState({
-    Pepperoni: true,
-    Sosis: false,
-    "Kanada Jambonu": false,
-    "Tavuk Izgara": false,
-    Soğan: false,
-    Domates: false,
-    Mısır: false,
-    Sucuk: false,
-    Jalapeno: true,
-    Sarımsak: true,
-    Biber: true,
-    Ananas: false,
-    Kabak: false,
+  const [formData, setFormData] = useState({
+    boyut: "orta",
+    kalınlık: "normal",
+    malzemeler: {
+      Pepperoni: true,
+      Sosis: false,
+      "Kanada Jambonu": false,
+      "Tavuk Izgara": false,
+      Soğan: false,
+      Domates: false,
+      Mısır: false,
+      Sucuk: false,
+      Jalapeno: true,
+      Sarımsak: true,
+      Biber: true,
+      Ananas: false,
+      Kabak: false,
+    },
+    not: "",
+    fiyat: 85,
+    adet: 1,
+    isimSoyisim: "",
+    isimValid: false,
+    malzemeFiyati: 20,
   });
-  const [not, setNot] = useState("");
-  const [fiyat, setFiyat] = useState(85);
-  const [adet, setAdet] = useState(1);
-  const [isimSoyisim, setIsimSoyisim] = useState("");
-  const [isimValid, setIsimValid] = useState(false);
-  const [siparisId, setSiparisId] = useState(null);
-  const [siparisTarih, setSiparisTarih] = useState("");
+
   const history = useHistory();
+
   const adetArttir = (event) => {
     event.preventDefault();
-    setAdet(adet + 1);
+    setFormData((prevState) => ({
+      ...prevState,
+      adet: prevState.adet + 1,
+    }));
   };
+
   const adetAzalt = (event) => {
     event.preventDefault();
-    if (adet > 1) {
-      setAdet(adet - 1);
+    if (formData.adet > 1) {
+      setFormData((prevState) => ({
+        ...prevState,
+        adet: prevState.adet - 1,
+      }));
     }
   };
-  const malzemeFiyati = Object.values(malzemeler).filter(Boolean).length * 5;
+
   useEffect(() => {
     let yeniFiyat = 85;
-    if (boyut === "küçük") {
+    if (formData.boyut === "küçük") {
       yeniFiyat -= 15;
-    } else if (boyut === "büyük") {
+    } else if (formData.boyut === "büyük") {
       yeniFiyat += 15;
     }
-    yeniFiyat += malzemeFiyati;
-    yeniFiyat *= adet;
-    setFiyat(yeniFiyat);
-  }, [adet, boyut, malzemeler, malzemeFiyati]);
+    yeniFiyat += formData.malzemeFiyati;
+    yeniFiyat *= formData.adet;
+    setFormData((prevState) => ({
+      ...prevState,
+      fiyat: yeniFiyat,
+    }));
+  }, [formData.adet, formData.boyut, formData.malzemeFiyati]);
 
   function handleChange(event) {
     const { name, value, type, checked } = event.target;
 
     if (type === "radio" && name === "boyut") {
-      setBoyut(value);
+      setFormData((prevState) => ({
+        ...prevState,
+        boyut: value,
+      }));
     } else if (type === "select-one" && name === "kalınlık") {
-      setKalınlık(value);
+      setFormData((prevState) => ({
+        ...prevState,
+        kalınlık: value,
+      }));
     } else if (type === "checkbox") {
-      const seciliMalzemeler = { ...malzemeler, [name]: checked };
+      const seciliMalzemeler = {
+        ...formData.malzemeler,
+        [name]: checked,
+      };
       const malzemeSayisi =
         Object.values(seciliMalzemeler).filter(Boolean).length;
       if (malzemeSayisi >= 4 && malzemeSayisi <= 10) {
-        setMalzemeler(seciliMalzemeler);
+        setFormData((prevState) => ({
+          ...prevState,
+          malzemeler: seciliMalzemeler,
+          malzemeFiyati: malzemeSayisi * 5,
+        }));
       }
     } else if (name === "not") {
-      setNot(value);
+      setFormData((prevState) => ({
+        ...prevState,
+        not: value,
+      }));
     } else if (name === "isimSoyisim") {
-      setIsimSoyisim(value);
-      setIsimValid(value.trim().length >= 3);
+      setFormData((prevState) => ({
+        ...prevState,
+        isimSoyisim: value,
+        isimValid: value.trim().length >= 3,
+      }));
     }
   }
 
   function handleSubmit(event) {
     event.preventDefault();
+    const {
+      boyut,
+      kalınlık,
+      malzemeler,
+      not,
+      fiyat,
+      adet,
+      isimSoyisim,
+      malzemeFiyati,
+    } = formData;
+
     const siparis = {
       boyut,
       kalınlık,
@@ -106,6 +148,7 @@ export default function SiparisFormSayfasi() {
         console.error("Hata:", err.response.data);
       });
   }
+
   return (
     <>
       <section>
@@ -117,7 +160,7 @@ export default function SiparisFormSayfasi() {
           <div className="info">
             <h2>Position Absolute Acı Pizza</h2>
             <div className="bilgi">
-              <span className="bold">{fiyat} ₺</span>
+              <span className="bold">{formData.fiyat} ₺</span>
               <span>4.9</span>
               <span>(1907)</span>
             </div>
@@ -130,38 +173,44 @@ export default function SiparisFormSayfasi() {
           </div>
           <form onSubmit={handleSubmit}>
             <div className="form-boyut-kalınlık">
-              <Boyut boyut={boyut} handleChange={handleChange} />
-              <Kalinlik kalınlık={kalınlık} handleChange={handleChange} />
+              <Boyut boyut={formData.boyut} handleChange={handleChange} />
+              <Kalinlik
+                kalınlık={formData.kalınlık}
+                handleChange={handleChange}
+              />
             </div>
-            <Malzeme malzemeler={malzemeler} handleChange={handleChange} />
-            <IsimSoyisim
-              isimSoyisim={isimSoyisim}
+            <Malzeme
+              malzemeler={formData.malzemeler}
               handleChange={handleChange}
-              isimValid={isimValid}
             />
-            <Not not={not} handleChange={handleChange} />
+            <IsimSoyisim
+              isimSoyisim={formData.isimSoyisim}
+              handleChange={handleChange}
+              isimValid={formData.isimValid}
+            />
+            <Not not={formData.not} handleChange={handleChange} />
             <Adet
-              adet={adet}
+              adet={formData.adet}
               adetArttir={adetArttir}
               adetAzalt={adetAzalt}
-              malzemeFiyati={malzemeFiyati}
-              fiyat={fiyat}
+              malzemeFiyati={formData.malzemeFiyati}
+              fiyat={formData.fiyat}
             />
-            <button disabled={!isimValid}>Sipariş Ver</button>
+            <button disabled={!formData.isimValid}>Sipariş Ver</button>
             <Link
               to={{
                 pathname: "/siparis-onay",
                 state: {
                   siparisId: null,
                   siparis: {
-                    boyut,
-                    kalınlık,
-                    malzemeler,
-                    not,
-                    fiyat,
-                    adet,
-                    isimSoyisim,
-                    malzemeFiyati,
+                    boyut: formData.boyut,
+                    kalınlık: formData.kalınlık,
+                    malzemeler: formData.malzemeler,
+                    not: formData.not,
+                    fiyat: formData.fiyat,
+                    adet: formData.adet,
+                    isimSoyisim: formData.isimSoyisim,
+                    malzemeFiyati: formData.malzemeFiyati,
                   },
                 },
               }}

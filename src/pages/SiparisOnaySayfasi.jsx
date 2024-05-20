@@ -1,7 +1,5 @@
 import styled from "styled-components";
-import SiparisFormSayfasi from "./SiparisFormSayfasi";
 import { useLocation } from "react-router-dom";
-import Header from "../components/Header";
 import { SatisfySpan, BigFontSpan } from "../components/Styled";
 const Container = styled.div`
   display: flex;

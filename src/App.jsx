@@ -1,4 +1,4 @@
-import react, { useEffect, useState } from "react";
+import React from "react";
 import Anasayfa from "./pages/Anasayfa";
 import SiparisFormSayfasi from "./pages/SiparisFormSayfasi";
 import SiparisOnaySayfasi from "./pages/SiparisOnaySayfasi";
