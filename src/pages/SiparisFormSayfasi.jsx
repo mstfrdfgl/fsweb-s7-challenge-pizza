@@ -197,7 +197,7 @@ export default function SiparisFormSayfasi() {
               fiyat={formData.fiyat}
             />
             <button disabled={!formData.isimValid}>Sipariş Ver</button>
-            <Link
+            {/* <Link
               to={{
                 pathname: "/siparis-onay",
                 state: {
@@ -214,7 +214,7 @@ export default function SiparisFormSayfasi() {
                   },
                 },
               }}
-            ></Link>
+            ></Link> */}
           </form>
         </div>
       </section>
