@@ -82,7 +82,7 @@ const Divl = styled.div`
   border-radius: 8px;
   padding: 1rem;
   flex: 1;
-  width: 100% @media (max-width: 600px) {
+  @media (max-width: 480px) {
     width: 100%;
   }
 `;

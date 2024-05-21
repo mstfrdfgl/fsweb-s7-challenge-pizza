@@ -52,7 +52,7 @@ button:hover {
 }
 
 section {
-  height: calc(100% - 10rem);
+  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -105,26 +105,25 @@ form {
   padding-top: 1rem;
 }
 input[type="radio"] {
-  appearance: none; /* Hides default radio button appearance */
-  width: 2rem; /* Radio button size */
-  height: 2rem; /* Radio button size */
-  border: 2px solid #ccc; /* Radio button border */
-  border-radius: 50%; /* Radio button shape */
-  cursor: pointer; /* Pointer cursor on hover */
-  /* Transition effect for background color */
+  appearance: none;
+  width: 2rem;
+  height: 2rem;
+  border: 2px solid #ccc;
+  border-radius: 50%;
+  cursor: pointer;
 }
 input[type="radio"]:checked {
-  background-color: #fdc913; /* Yellow background color for checked radio button */
-  border-color: #fdc913; /* Yellow border color for checked radio button */
+  background-color: #fdc913;
+  border-color: #fdc913;
 }
 .boyut-label {
-  margin-left: 5px; /* Spacing between radio button and label */
-  font-size: 14px; /* Label font size */
+  margin-left: 5px;
+  font-size: 14px;
 }
 .boyut-form {
-  display: flex; /* Arrange radio buttons in a row */
-  flex-direction: column; /* Align radio buttons horizontally */
-  margin-bottom: 15px; /* Spacing between radio groups */
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
 }
 .boyut-form {
   text-align: left;
@@ -232,7 +231,7 @@ textarea {
 .zorunlu {
   color: #ce2829;
 }
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 480px) {
   .header-container,
   .section-container {
     width: 100%;

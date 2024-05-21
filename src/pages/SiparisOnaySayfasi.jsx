@@ -19,7 +19,7 @@ const Section = styled.section`
   justify-content: flex-start;
   width: 40%;
 
-  @media (max-width: 600px) {
+  @media (max-width: 480px) {
     width: 100%;
   }
 `;
