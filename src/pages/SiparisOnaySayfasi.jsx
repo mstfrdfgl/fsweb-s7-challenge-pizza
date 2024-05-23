@@ -1,6 +1,9 @@
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { useParams, useLocation } from "react-router-dom";
 import styled from "styled-components";
-import { useLocation } from "react-router-dom";
 import { SatisfySpan, BigFontSpan } from "../components/Styled";
+
 const Container = styled.div`
   display: flex;
   flex-direction: column;
@@ -52,12 +55,14 @@ const FiyatBorderDiv = styled.div`
   margin: 1rem;
   padding: 1rem;
 `;
-export default function SiparisOnaySayfasi() {
-  const location = useLocation();
-  const { siparisId, siparis } = location.state || {};
-  location.state || {};
+
+export default function SiparisOnaySayfasi({ siparis }) {
+  const { siparisId } = useParams();
+  // const location = useLocation();
+  // const { siparis } = location.state || {};
   const { boyut, kalınlık, malzemeler, malzemeFiyati, fiyat, isimSoyisim } =
     siparis;
+
   return (
     <>
       <Container className="siparis-onay-container">

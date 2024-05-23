@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import Boyut from "../forminputs/Boyut";
 import Kalinlik from "../forminputs/Kalinlik";
 import Malzeme from "../forminputs/Malzeme";
@@ -8,7 +8,8 @@ import IsimSoyisim from "../forminputs/IsimSoyisim";
 import Not from "../forminputs/Not";
 import Adet from "../forminputs/Adet";
 
-export default function SiparisFormSayfasi() {
+export default function SiparisFormSayfasi({ setSiparis }) {
+  const history = useHistory();
   const [formData, setFormData] = useState({
     boyut: "orta",
     kalınlık: "normal",
@@ -34,8 +35,6 @@ export default function SiparisFormSayfasi() {
     isimValid: false,
     malzemeFiyati: 20,
   });
-
-  const history = useHistory();
 
   const adetArttir = (event) => {
     event.preventDefault();
@@ -134,15 +133,12 @@ export default function SiparisFormSayfasi() {
       isimSoyisim,
       malzemeFiyati,
     };
-
     axios
       .post("https://reqres.in/api/pizza", siparis)
       .then((res) => {
         console.log("Yanıt:", res.data);
-        history.push({
-          pathname: "siparis-onay",
-          state: { siparisId: res.data.id, siparis },
-        });
+        setSiparis(siparis);
+        history.push(`/siparis-onay/${res.data.id}`);
       })
       .catch((err) => {
         console.error("Hata:", err.response.data);
@@ -197,24 +193,6 @@ export default function SiparisFormSayfasi() {
               fiyat={formData.fiyat}
             />
             <button disabled={!formData.isimValid}>Sipariş Ver</button>
-            {/* <Link
-              to={{
-                pathname: "/siparis-onay",
-                state: {
-                  siparisId: null,
-                  siparis: {
-                    boyut: formData.boyut,
-                    kalınlık: formData.kalınlık,
-                    malzemeler: formData.malzemeler,
-                    not: formData.not,
-                    fiyat: formData.fiyat,
-                    adet: formData.adet,
-                    isimSoyisim: formData.isimSoyisim,
-                    malzemeFiyati: formData.malzemeFiyati,
-                  },
-                },
-              }}
-            ></Link> */}
           </form>
         </div>
       </section>

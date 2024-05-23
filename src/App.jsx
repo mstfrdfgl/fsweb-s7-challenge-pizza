@@ -1,23 +1,28 @@
-import React from "react";
+import React, { useState } from "react";
 import Anasayfa from "./pages/Anasayfa";
 import SiparisFormSayfasi from "./pages/SiparisFormSayfasi";
 import SiparisOnaySayfasi from "./pages/SiparisOnaySayfasi";
-import { Router, Switch, Route, BrowserRouter } from "react-router-dom";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
 import "./App.css";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import ScrollToTop from "./components/ScrollToTop";
 
 function App() {
+  const [siparis, setSiparis] = useState(null);
   return (
     <>
-      <Header />{" "}
+      <Header />
       <BrowserRouter>
         <ScrollToTop />
         <Switch>
           <Route exact path="/" component={Anasayfa} />
-          <Route path="/siparis-form" component={SiparisFormSayfasi} />
-          <Route path="/siparis-onay" component={SiparisOnaySayfasi} />
+          <Route path="/siparis-form">
+            <SiparisFormSayfasi setSiparis={setSiparis} />
+          </Route>
+          <Route path="/siparis-onay/:siparisId">
+            <SiparisOnaySayfasi siparis={siparis} />
+          </Route>
         </Switch>
       </BrowserRouter>
       <Footer />
