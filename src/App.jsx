@@ -16,7 +16,9 @@ function App() {
       <BrowserRouter>
         <ScrollToTop />
         <Switch>
-          <Route exact path="/" component={Anasayfa} />
+          <Route exact path="/">
+            <Anasayfa />
+          </Route>
           <Route path="/siparis-form">
             <SiparisFormSayfasi setSiparis={setSiparis} />
           </Route>
